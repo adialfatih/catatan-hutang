@@ -1,0 +1,43 @@
+pstxmyid_ctt_staff
+cyF!K1s)NyMcl3T)
+pstxmyid_sapini
+
+-- =============================================
+-- Database: ob_finance
+-- Aplikasi Pencatatan Keuangan OB Kantor
+-- =============================================
+
+CREATE DATABASE IF NOT EXISTS ob_finance CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ob_finance;
+
+-- Tabel Staff
+CREATE TABLE IF NOT EXISTS staff (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100) NOT NULL,
+    saldo DECIMAL(15,2) DEFAULT 0.00,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Tabel Transaksi
+CREATE TABLE IF NOT EXISTS transaksi (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    staff_id INT NOT NULL,
+    tipe ENUM('pembelian','pembayaran') NOT NULL,
+    tanggal DATE NOT NULL,
+    nominal DECIMAL(15,2) NOT NULL,
+    keterangan TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (staff_id) REFERENCES staff(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- Insert data staff awal
+INSERT INTO staff (nama, saldo) VALUES
+('Adi', 0.00),
+('Pak Ibnu', 0.00),
+('Pak Luthfi', 0.00),
+('Pak Hamid', 0.00),
+('Pak Zaenal', 0.00),
+('Bima', 0.00),
+('Mbak Isti', 0.00),
+('Safina', 0.00),
+('Rosi', 0.00);
